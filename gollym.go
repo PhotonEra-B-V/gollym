@@ -96,6 +96,8 @@ var (
 	NewChat = core.NewChat
 	// With attaches files to an Ask.
 	With = core.With
+	// NewAttachment wraps a path, URL, bytes, reader or uploaded file.
+	NewAttachment = core.NewAttachment
 	// OnChunk streams an Ask.
 	OnChunk = core.OnChunk
 	// NewTool builds a function tool.
