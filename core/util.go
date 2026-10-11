@@ -3,7 +3,6 @@ package core
 import (
 	"encoding/json"
 	"maps"
-	"math"
 	"regexp"
 	"strings"
 	"time"
@@ -245,20 +244,14 @@ func Underscore(name string) string {
 	return strings.ToLower(name)
 }
 
-// ToTime parses ISO timestamps and unix seconds (pyllym utils.to_time).
+// ToTime parses ISO timestamps (pyllym utils.to_time). Like Python's
+// datetime.fromisoformat it doesn't read unix seconds: those are nil.
 func ToTime(v any) *time.Time {
 	switch x := v.(type) {
 	case nil:
 		return nil
 	case time.Time:
 		return &x
-	case float64:
-		sec, frac := math.Modf(x)
-		t := time.Unix(int64(sec), int64(frac*1e9)).UTC()
-		return &t
-	case int:
-		t := time.Unix(int64(x), 0).UTC()
-		return &t
 	case string:
 		s := strings.TrimSpace(x)
 		if s == "" {

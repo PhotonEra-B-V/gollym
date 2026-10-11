@@ -93,10 +93,15 @@ var (
 // pyllym's Error.__init__ does.
 func NewError(k ErrorKind, resp *Response, message string) *Error {
 	if message == "" && resp != nil {
-		if s, ok := resp.Body.(string); ok {
-			message = s
-		} else if resp.Body != nil {
-			message = fmt.Sprint(resp.Body)
+		switch b := resp.Body.(type) {
+		case string:
+			message = b
+		case []byte:
+			message = string(b)
+		default:
+			if Truthy(b) {
+				message = PyStr(b)
+			}
 		}
 	}
 	if message == "" {

@@ -3,6 +3,7 @@ package core
 import (
 	"sort"
 	"strings"
+	"unicode"
 )
 
 func sortStrings(s []string) { sort.Strings(s) }
@@ -57,7 +58,7 @@ func (p *SSEParser) line(line string) error {
 	case strings.HasPrefix(line, "event:"):
 		p.eventType = strings.TrimSpace(line[len("event:"):])
 	case strings.HasPrefix(line, "data:"):
-		p.data = append(p.data, strings.TrimLeft(line[len("data:"):], " \t"))
+		p.data = append(p.data, strings.TrimLeftFunc(line[len("data:"):], unicode.IsSpace))
 	}
 	return nil
 }

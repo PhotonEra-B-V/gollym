@@ -1,0 +1,390 @@
+{
+ "full": {
+  "messages": [
+   {
+    "role": "user",
+    "content": [
+     {
+      "text": "What's the weather?"
+     },
+     {
+      "image": {
+       "format": "png",
+       "source": {
+        "bytes": "iVBORw0KGgowMDAw"
+       }
+      }
+     },
+     {
+      "document": {
+       "format": "pdf",
+       "name": "report",
+       "source": {
+        "bytes": "JVBERi0xLjQgdGVzdA=="
+       }
+      }
+     },
+     {
+      "document": {
+       "format": "pdf",
+       "name": "report_2",
+       "source": {
+        "bytes": "JVBERi0xLjQgb3RoZXI="
+       }
+      }
+     },
+     {
+      "text": "<file name='data.csv' mime_type='text/csv'>a,b\n1,2\n</file>"
+     },
+     {
+      "text": "<file name='notes.txt' mime_type='text/plain'>hello notes</file>"
+     }
+    ]
+   },
+   {
+    "role": "assistant",
+    "content": [
+     {
+      "reasoningContent": {
+       "reasoningText": {
+        "text": "let me think",
+        "signature": "sig1"
+       }
+      }
+     },
+     {
+      "toolUse": {
+       "toolUseId": "t1",
+       "name": "weather",
+       "input": {
+        "city": "Paris"
+       }
+      }
+     },
+     {
+      "toolUse": {
+       "toolUseId": "t2",
+       "name": "weather",
+       "input": {
+        "city": "Oslo"
+       }
+      }
+     }
+    ]
+   },
+   {
+    "role": "user",
+    "content": [
+     {
+      "toolResult": {
+       "toolUseId": "t1",
+       "content": [
+        {
+         "text": "Sunny"
+        }
+       ]
+      }
+     },
+     {
+      "toolResult": {
+       "toolUseId": "t2",
+       "content": [
+        {
+         "text": "(no output)"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   {
+    "role": "assistant",
+    "content": [
+     {
+      "reasoningContent": {
+       "redactedContent": "redacted-blob"
+      }
+     },
+     {
+      "text": "Paris is sunny; Oslo unknown."
+     }
+    ]
+   },
+   {
+    "role": "user",
+    "content": [
+     {
+      "text": "raw user"
+     }
+    ]
+   },
+   {
+    "role": "assistant",
+    "content": [
+     {
+      "text": "raw assistant"
+     }
+    ]
+   }
+  ],
+  "system": [
+   {
+    "text": "Be brief."
+   }
+  ],
+  "inferenceConfig": {
+   "temperature": 0.3
+  },
+  "toolConfig": {
+   "tools": [
+    {
+     "toolSpec": {
+      "name": "weather",
+      "description": "Get the weather",
+      "inputSchema": {
+       "json": {
+        "type": "object",
+        "properties": {
+         "city": {
+          "type": "string",
+          "description": "City"
+         }
+        },
+        "required": [
+         "city"
+        ],
+        "additionalProperties": false,
+        "strict": true
+       }
+      }
+     }
+    }
+   ],
+   "toolChoice": {
+    "tool": {
+     "name": "weather"
+    }
+   }
+  }
+ },
+ "effort_embedded": {
+  "messages": [
+   {
+    "role": "user",
+    "content": [
+     {
+      "text": "hi"
+     }
+    ]
+   }
+  ],
+  "inferenceConfig": {},
+  "additionalModelRequestFields": {
+   "reasoning_config": {
+    "type": "enabled",
+    "reasoning_effort": "high"
+   }
+  }
+ },
+ "effort_plain": {
+  "messages": [
+   {
+    "role": "user",
+    "content": [
+     {
+      "text": "hi"
+     }
+    ]
+   }
+  ],
+  "inferenceConfig": {},
+  "additionalModelRequestFields": {
+   "reasoning_effort": "low"
+  }
+ },
+ "budget": {
+  "messages": [
+   {
+    "role": "user",
+    "content": [
+     {
+      "text": "hi"
+     }
+    ]
+   }
+  ],
+  "inferenceConfig": {},
+  "additionalModelRequestFields": {
+   "reasoning_config": {
+    "type": "enabled",
+    "budget_tokens": 2048
+   }
+  }
+ },
+ "effort_none_budget": {
+  "messages": [
+   {
+    "role": "user",
+    "content": [
+     {
+      "text": "hi"
+     }
+    ]
+   }
+  ],
+  "inferenceConfig": {},
+  "additionalModelRequestFields": {
+   "reasoning_config": {
+    "type": "enabled",
+    "budget_tokens": 1024
+   }
+  }
+ },
+ "schema": {
+  "messages": [
+   {
+    "role": "user",
+    "content": [
+     {
+      "text": "hi"
+     }
+    ]
+   }
+  ],
+  "inferenceConfig": {},
+  "outputConfig": {
+   "textFormat": {
+    "type": "json_schema",
+    "structure": {
+     "jsonSchema": {
+      "schema": "{\"type\": \"object\", \"properties\": {\"name\": {\"type\": \"string\"}}, \"required\": [\"name\"], \"additionalProperties\": false}",
+      "name": "Person_card_"
+     }
+    }
+   }
+  }
+ },
+ "choice_auto": {
+  "messages": [
+   {
+    "role": "user",
+    "content": [
+     {
+      "text": "hi"
+     }
+    ]
+   }
+  ],
+  "inferenceConfig": {},
+  "toolConfig": {
+   "tools": [
+    {
+     "toolSpec": {
+      "name": "weather",
+      "description": "Get the weather",
+      "inputSchema": {
+       "json": {
+        "type": "object",
+        "properties": {
+         "city": {
+          "type": "string",
+          "description": "City"
+         }
+        },
+        "required": [
+         "city"
+        ],
+        "additionalProperties": false,
+        "strict": true
+       }
+      }
+     }
+    }
+   ],
+   "toolChoice": {
+    "auto": {}
+   }
+  }
+ },
+ "choice_none": {
+  "messages": [
+   {
+    "role": "user",
+    "content": [
+     {
+      "text": "hi"
+     }
+    ]
+   }
+  ],
+  "inferenceConfig": {},
+  "toolConfig": {
+   "tools": [
+    {
+     "toolSpec": {
+      "name": "weather",
+      "description": "Get the weather",
+      "inputSchema": {
+       "json": {
+        "type": "object",
+        "properties": {
+         "city": {
+          "type": "string",
+          "description": "City"
+         }
+        },
+        "required": [
+         "city"
+        ],
+        "additionalProperties": false,
+        "strict": true
+       }
+      }
+     }
+    }
+   ]
+  }
+ },
+ "choice_required": {
+  "messages": [
+   {
+    "role": "user",
+    "content": [
+     {
+      "text": "hi"
+     }
+    ]
+   }
+  ],
+  "inferenceConfig": {},
+  "toolConfig": {
+   "tools": [
+    {
+     "toolSpec": {
+      "name": "weather",
+      "description": "Get the weather",
+      "inputSchema": {
+       "json": {
+        "type": "object",
+        "properties": {
+         "city": {
+          "type": "string",
+          "description": "City"
+         }
+        },
+        "required": [
+         "city"
+        ],
+        "additionalProperties": false,
+        "strict": true
+       }
+      }
+     }
+    }
+   ],
+   "toolChoice": {
+    "any": {}
+   }
+  }
+ }
+}

@@ -200,9 +200,20 @@ func (b *BaseProvider) ProtocolName(explicit string, model *Info) (string, error
 			names = append(names, n)
 		}
 		sort.Strings(names)
-		return "", fmt.Errorf("%s is not a protocol of %s. Available: %s", name, b.spec.DisplayName(), strings.Join(names, ", "))
+		return "", &Error{Kind: KindError, Message: fmt.Sprintf("%s is not a protocol of %s. Available: %s", name, b.spec.DisplayName(), strings.Join(names, ", "))}
 	}
 	return name, nil
+}
+
+// DefaultProtocolName is the configured <slug>_protocol, else the spec's
+// default; unlike ProtocolName it never asks spec.ProtocolFor (pyllym's
+// _default_protocol, used by embeddings, images and the other model-less
+// operations).
+func (b *BaseProvider) DefaultProtocolName() string {
+	if name := b.cfg.Get(b.spec.Slug + "_protocol"); name != "" {
+		return name
+	}
+	return b.spec.defaultProtocol()
 }
 
 func (b *BaseProvider) Protocol(name string, model *Info) (Protocol, error) {
@@ -254,7 +265,7 @@ func MustLookupProvider(slug string) (*ProviderSpec, error) {
 	if s, ok := LookupProvider(slug); ok {
 		return s, nil
 	}
-	return nil, fmt.Errorf("Unknown provider: %q. Available providers: %s", slug, strings.Join(ProviderSlugs(), ", "))
+	return nil, &Error{Kind: KindError, Message: fmt.Sprintf("Unknown provider: %s. Available providers: %s", pyQuote(slug), strings.Join(ProviderSlugs(), ", "))}
 }
 
 // ProviderSlugs lists registered providers in registration order.

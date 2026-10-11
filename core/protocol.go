@@ -267,8 +267,15 @@ func StreamError(data string) error {
 	return &Error{Kind: kind, Message: message}
 }
 
-// ProtocolFor resolves the provider's default protocol (model-less ops).
-func ProtocolFor(p Provider) (Protocol, error) { return p.Protocol("", nil) }
+// ProtocolFor resolves the provider's default protocol (model-less ops):
+// the configured <slug>_protocol, else the spec default, never the per-model
+// choice (pyllym's Provider._default_protocol).
+func ProtocolFor(p Provider) (Protocol, error) {
+	if d, ok := p.(interface{ DefaultProtocolName() string }); ok {
+		return p.Protocol(d.DefaultProtocolName(), nil)
+	}
+	return p.Protocol("", nil)
+}
 
 // AsFeature returns p's default protocol as feature interface T, or
 // ErrUnsupported naming the feature.

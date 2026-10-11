@@ -11,6 +11,7 @@ import (
 	"os"
 	"path/filepath"
 	"regexp"
+	"strconv"
 	"strings"
 
 	"github.com/PhotonEra-B-V/gollym/core"
@@ -159,11 +160,10 @@ func (c *Protocol) parseBody(data any, raw *core.Response) (*core.Message, error
 }
 
 // UsageTokens reads Chat Completions usage (input excludes cache reads and
-// writes; output is the larger of completion and total-prompt).
+// writes; output is the larger of completion and total-prompt). As in
+// pyllym the cache-write count is always reported (0 without usage), so the
+// result is never nil.
 func UsageTokens(usage map[string]any) *core.Tokens {
-	if usage == nil {
-		return nil
-	}
 	cacheWrite := CacheWriteTokens(usage)
 	return core.BuildTokens(InputTokens(usage), OutputTokens(usage), CacheReadTokens(usage), &cacheWrite, ThinkingTokens(usage))
 }
@@ -251,8 +251,12 @@ func (c *Protocol) FormatRole(role string) string {
 }
 
 func (c *Protocol) useDeveloperRole() bool {
-	if core.Truthy(c.Provider.Config().Get("openai_use_system_role")) {
-		return false
+	// Config values are strings: "false"/"0" mean False, as a Go caller
+	// would write them; any other non-empty value is truthy.
+	if v := c.Provider.Config().Get("openai_use_system_role"); v != "" {
+		if b, err := strconv.ParseBool(v); err != nil || b {
+			return false
+		}
 	}
 	return c.Provider.UsesDeveloperRole()
 }
@@ -360,7 +364,7 @@ func FormatAttachment(a *core.Attachment, o ContentOptions) (map[string]any, err
 // ToolFor renders a tool definition.
 func ToolFor(t core.Tool) map[string]any {
 	schema := t.ParamsSchema()
-	if schema == nil {
+	if len(schema) == 0 {
 		schema = EmptyParametersSchema()
 	}
 	def := map[string]any{
@@ -765,10 +769,16 @@ func (c *Protocol) ListModels(ctx context.Context) ([]*core.Info, error) {
 	if err != nil {
 		return nil, err
 	}
-	return ParseListModels(resp, c.Provider.Slug(), c.Provider.Capabilities()), nil
+	// pyllym passes None for providers without a capabilities class.
+	var caps core.Capabilities
+	if c.Provider.Spec().Capabilities != nil {
+		caps = c.Provider.Capabilities()
+	}
+	return ParseListModels(resp, c.Provider.Slug(), caps), nil
 }
 
-// ParseListModels reads a /models listing.
+// ParseListModels reads a /models listing. A nil caps leaves context
+// window, max tokens, capabilities and pricing empty.
 func ParseListModels(resp *core.Response, slug string, caps core.Capabilities) []*core.Info {
 	var out []*core.Info
 	for _, raw := range core.ToSafeArray(core.Dig(resp.Body, "data")) {
@@ -778,13 +788,19 @@ func ParseListModels(resp *core.Response, slug string, caps core.Capabilities) [
 		}
 		id, _ := md["id"].(string)
 		capList := []any{}
-		for _, c := range caps.CriticalCapabilitiesFor(id) {
-			capList = append(capList, c)
+		var ctxWindow, maxTokens any
+		pricing := map[string]any{}
+		if caps != nil {
+			for _, c := range caps.CriticalCapabilitiesFor(id) {
+				capList = append(capList, c)
+			}
+			ctxWindow, maxTokens = derefAny(caps.ContextWindowFor(id)), derefAny(caps.MaxTokensFor(id))
+			pricing = caps.PricingFor(id)
 		}
 		out = append(out, core.NewInfo(map[string]any{
 			"id": id, "name": id, "provider": slug, "created_at": md["created"],
-			"context_window": derefAny(caps.ContextWindowFor(id)), "max_output_tokens": derefAny(caps.MaxTokensFor(id)),
-			"capabilities": capList, "pricing": caps.PricingFor(id),
+			"context_window": ctxWindow, "max_output_tokens": maxTokens,
+			"capabilities": capList, "pricing": pricing,
 			"metadata": map[string]any{"object": md["object"], "owned_by": md["owned_by"]},
 		}))
 	}
@@ -884,7 +900,7 @@ func (c *Protocol) Transcribe(ctx context.Context, audioFile string, o core.Tran
 		data["prompt"] = o.Prompt
 	}
 	if o.Temperature != nil {
-		data["temperature"] = fmt.Sprint(*o.Temperature)
+		data["temperature"] = core.PyStr(*o.Temperature) // str(float): "0.0"
 	}
 	payload := &core.Multipart{Data: data, Files: map[string]core.MultipartFile{"file": {Filename: filepath.Base(path), Content: content}}}
 	resp, err := c.conn().Post(ctx, c.TranscriptionURL(), payload, nil)

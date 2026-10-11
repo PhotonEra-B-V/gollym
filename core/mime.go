@@ -5,7 +5,7 @@ import (
 	_ "embed"
 	"encoding/json"
 	"net/http"
-	"path"
+	"net/url"
 	"strings"
 	"sync"
 )
@@ -52,7 +52,17 @@ var documentMIMEPrefixes = []string{
 	"application/vnd.oasis.opendocument.",
 }
 
-// MIMEForName guesses a type from a filename (Python mimetypes.guess_type).
+// Python's mimetypes suffix_map and encodings_map (3.14).
+var (
+	mimeSuffixMap = map[string]string{
+		".svgz": ".svg.gz", ".tgz": ".tar.gz", ".taz": ".tar.gz", ".tz": ".tar.gz", ".tbz2": ".tar.bz2", ".txz": ".tar.xz",
+	}
+	mimeEncodings = map[string]bool{".gz": true, ".Z": true, ".bz2": true, ".xz": true, ".br": true}
+)
+
+// MIMEForName guesses a type from a filename or URL like Python's
+// mimetypes.guess_type with only the built-in table: x.tar.gz is a tar
+// (gzip-encoded), .tgz expands to .tar.gz, and dotfiles have no extension.
 func MIMEForName(name string) string {
 	mimeOnce.Do(func() {
 		mimeTable = map[string]string{}
@@ -61,15 +71,65 @@ func MIMEForName(name string) string {
 	if name == "" {
 		return ""
 	}
-	ext := strings.ToLower(path.Ext(name))
-	if ext == "" {
+	p := name
+	if u, err := url.Parse(name); err == nil && len(u.Scheme) > 1 {
+		if strings.EqualFold(u.Scheme, "data") {
+			return dataURLType(name[len(u.Scheme)+1:])
+		}
+		p = u.Path
+		if p == "" {
+			p = u.Opaque
+		}
+	}
+	base, ext := pySplitext(p)
+	for {
+		s, ok := mimeSuffixMap[strings.ToLower(ext)]
+		if !ok {
+			break
+		}
+		base, ext = pySplitext(base + s)
+	}
+	if mimeEncodings[ext] { // case sensitive, as in Python
+		_, ext = pySplitext(base)
+	}
+	return mimeTable[strings.ToLower(ext)]
+}
+
+// dataURLType is guess_type's reading of a data: URL's media type.
+func dataURLType(rest string) string {
+	comma := strings.IndexByte(rest, ',')
+	if comma < 0 {
 		return ""
 	}
-	if t, ok := mimeTable[ext]; ok {
-		return t
+	t := rest[:comma]
+	if semi := strings.IndexByte(t, ';'); semi >= 0 {
+		t = t[:semi]
 	}
-	// guess_type is case-sensitive first, then lowercase.
-	return mimeTable[path.Ext(name)]
+	if strings.Contains(t, "=") || !strings.Contains(t, "/") {
+		return "text/plain"
+	}
+	return t
+}
+
+// pySplitext is os.path.splitext: the extension starts at the last dot of
+// the base name, ignoring leading dots (".bashrc" has none).
+func pySplitext(p string) (string, string) {
+	sep := strings.LastIndexByte(p, '/')
+	dot := strings.LastIndexByte(p, '.')
+	if dot > sep {
+		for i := sep + 1; i < dot; i++ {
+			if p[i] != '.' {
+				return p[:dot], p[dot:]
+			}
+		}
+	}
+	return p, ""
+}
+
+// pyExt is the extension pySplitext finds.
+func pyExt(name string) string {
+	_, ext := pySplitext(name)
+	return ext
 }
 
 // MIMEForSource is mime_type.for_source: name first, then a path source, then

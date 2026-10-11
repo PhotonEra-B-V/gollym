@@ -1,0 +1,798 @@
+{
+ "aggregate_full": {
+  "cache_read": 0.0003,
+  "cache_write": 0.0002,
+  "input": 0.004,
+  "output": 0.032,
+  "thinking": 0.01,
+  "total": 0.0465
+ },
+ "aggregate_missing": {
+  "dict": {
+   "cache_read": 0.00015,
+   "cache_write": 0.0001,
+   "output": 0.016,
+   "thinking": 0.005
+  },
+  "input_missing": true
+ },
+ "attachments": [
+  [
+   "a.txt",
+   "text/plain",
+   "text",
+   "plain",
+   "txt"
+  ],
+  [
+   "a.PDF",
+   "application/pdf",
+   "pdf",
+   "pdf",
+   "pdf"
+  ],
+  [
+   "a.json",
+   "application/json",
+   "text",
+   "json",
+   "json"
+  ],
+  [
+   ".json",
+   "application/octet-stream",
+   "unknown",
+   "octet-stream",
+   null
+  ],
+  [
+   "x.tar.gz",
+   "application/x-tar",
+   "unknown",
+   "x-tar",
+   "gz"
+  ],
+  [
+   "a.md",
+   "text/markdown",
+   "text",
+   "markdown",
+   "md"
+  ],
+  [
+   "a.csv",
+   "text/csv",
+   "text",
+   "csv",
+   "csv"
+  ],
+  [
+   "a.docx",
+   "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+   "document",
+   "vnd.openxmlformats-officedocument.wordprocessingml.document",
+   "docx"
+  ],
+  [
+   "a.mp3",
+   "audio/mpeg",
+   "audio",
+   "mp3",
+   "mp3"
+  ],
+  [
+   "a.wav",
+   "audio/vnd.wave",
+   "audio",
+   "vnd.wave",
+   "wav"
+  ],
+  [
+   "a.webp",
+   "image/webp",
+   "image",
+   "webp",
+   "webp"
+  ],
+  [
+   "a.heic",
+   "image/heic",
+   "image",
+   "heic",
+   "heic"
+  ],
+  [
+   "noext",
+   "application/octet-stream",
+   "unknown",
+   "octet-stream",
+   null
+  ],
+  [
+   "a.yaml",
+   "application/yaml",
+   "text",
+   "yaml",
+   "yaml"
+  ],
+  [
+   "a.py",
+   "text/x-python",
+   "text",
+   "x-python",
+   "py"
+  ],
+  [
+   "a.svg",
+   "image/svg+xml",
+   "image",
+   "svg+xml",
+   "svg"
+  ],
+  [
+   "a.m4a",
+   "audio/mp4",
+   "audio",
+   "mp4",
+   "m4a"
+  ],
+  [
+   "a.html",
+   "text/html",
+   "text",
+   "html",
+   "html"
+  ],
+  [
+   "a.xlsx",
+   "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+   "document",
+   "vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+   "xlsx"
+  ],
+  [
+   "a.key",
+   "application/octet-stream",
+   "document",
+   "octet-stream",
+   "key"
+  ],
+  [
+   "a.rtf",
+   "text/rtf",
+   "text",
+   "rtf",
+   "rtf"
+  ],
+  [
+   "a.js",
+   "text/javascript",
+   "text",
+   "javascript",
+   "js"
+  ],
+  [
+   "a.ts",
+   "application/octet-stream",
+   "unknown",
+   "octet-stream",
+   "ts"
+  ],
+  [
+   "a.mp4",
+   "video/mp4",
+   "video",
+   "mp4",
+   "mp4"
+  ],
+  [
+   "a.mov",
+   "video/quicktime",
+   "video",
+   "quicktime",
+   "mov"
+  ],
+  [
+   "a.jpeg",
+   "image/jpeg",
+   "image",
+   "jpeg",
+   "jpeg"
+  ],
+  [
+   "a.ogg",
+   "audio/ogg",
+   "audio",
+   "ogg",
+   "ogg"
+  ],
+  [
+   "a.flac",
+   "audio/flac",
+   "audio",
+   "flac",
+   "flac"
+  ],
+  [
+   "a.toml",
+   "application/octet-stream",
+   "unknown",
+   "octet-stream",
+   "toml"
+  ],
+  [
+   "a.xml",
+   "text/xml",
+   "text",
+   "xml",
+   "xml"
+  ],
+  [
+   "a.go",
+   "application/octet-stream",
+   "unknown",
+   "octet-stream",
+   "go"
+  ],
+  [
+   "a.sh",
+   "application/x-sh",
+   "text",
+   "x-sh",
+   "sh"
+  ],
+  [
+   "dir.d/file",
+   "application/octet-stream",
+   "unknown",
+   "octet-stream",
+   null
+  ],
+  [
+   "a.doc",
+   "application/msword",
+   "document",
+   "msword",
+   "doc"
+  ],
+  [
+   "a.Jpg",
+   "image/jpeg",
+   "image",
+   "jpeg",
+   "jpg"
+  ]
+ ],
+ "costs": {
+  "cache_only_zero": {
+   "cache_write": 0.0,
+   "total": 0.0
+  },
+  "full": {
+   "cache_read": 0.00015,
+   "cache_write": 0.0001,
+   "input": 0.002,
+   "output": 0.016,
+   "thinking": 0.005,
+   "total": 0.02325
+  },
+  "image": {
+   "input": 0.00037999999999999997,
+   "output": 0.04,
+   "total": 0.04038
+  },
+  "image_no_details": {
+   "input": 0.0002,
+   "output": 0.04,
+   "total": 0.0402
+  },
+  "no_tokens": {},
+  "same_reasoning": {
+   "input": 0.001,
+   "output": 0.008,
+   "total": 0.009000000000000001
+  },
+  "unpriced": {},
+  "zero_tokens": {
+   "input": 0.0,
+   "output": 0.0,
+   "total": 0.0
+  }
+ },
+ "default_names": [
+  [
+   "gpt-4o-mini-x",
+   "Gpt 4o mini x"
+  ],
+  [
+   "my-Model",
+   "My model"
+  ],
+  [
+   "über-model",
+   "Über model"
+  ],
+  [
+   "",
+   ""
+  ]
+ ],
+ "error_for_status": [
+  [
+   400,
+   null,
+   "BadRequestError"
+  ],
+  [
+   401,
+   null,
+   "UnauthorizedError"
+  ],
+  [
+   402,
+   null,
+   "PaymentRequiredError"
+  ],
+  [
+   403,
+   null,
+   "ForbiddenError"
+  ],
+  [
+   404,
+   null,
+   "BadRequestError"
+  ],
+  [
+   413,
+   "too many tokens",
+   "ContextLengthExceededError"
+  ],
+  [
+   413,
+   null,
+   "BadRequestError"
+  ],
+  [
+   422,
+   null,
+   "BadRequestError"
+  ],
+  [
+   429,
+   null,
+   "RateLimitError"
+  ],
+  [
+   429,
+   "You exceeded your current quota",
+   "PaymentRequiredError"
+  ],
+  [
+   429,
+   "maximum context length",
+   "ContextLengthExceededError"
+  ],
+  [
+   500,
+   null,
+   "ServerError"
+  ],
+  [
+   501,
+   null,
+   "ServerError"
+  ],
+  [
+   502,
+   null,
+   "ServiceUnavailableError"
+  ],
+  [
+   503,
+   null,
+   "ServiceUnavailableError"
+  ],
+  [
+   504,
+   null,
+   "ServiceUnavailableError"
+  ],
+  [
+   529,
+   null,
+   "OverloadedError"
+  ],
+  [
+   418,
+   null,
+   "BadRequestError"
+  ],
+  [
+   302,
+   null,
+   "ServerError"
+  ]
+ ],
+ "parse_error_body": [
+  [
+   "plain",
+   "plain"
+  ],
+  [
+   "{\"error\": \"e\"}",
+   "e"
+  ],
+  [
+   {
+    "error": {
+     "message": "m"
+    }
+   },
+   "m"
+  ],
+  [
+   {
+    "message": "x"
+   },
+   "x"
+  ],
+  [
+   {
+    "detail": "d"
+   },
+   "d"
+  ],
+  [
+   {
+    "error": {
+     "code": 1
+    }
+   },
+   null
+  ],
+  [
+   [
+    {
+     "error": {
+      "message": "a"
+     }
+    },
+    {
+     "error": "b"
+    },
+    "x",
+    {
+     "error": {
+      "message": ""
+     }
+    }
+   ],
+   "a. b"
+  ],
+  [
+   {
+    "error": {
+     "message": 5
+    },
+    "message": "fallback"
+   },
+   "fallback"
+  ]
+ ],
+ "retry_after": [
+  [
+   {
+    "retry-after": "0"
+   },
+   0.0
+  ],
+  [
+   {
+    "retry-after": "-5"
+   },
+   0.0
+  ],
+  [
+   {
+    "retry-after": "3",
+    "retry-after-ms": "abc"
+   },
+   3.0
+  ],
+  [
+   {
+    "x-ratelimit-reset-tokens": "1m30s"
+   },
+   90.0
+  ],
+  [
+   {
+    "x-ratelimit-remaining-tokens": "0",
+    "x-ratelimit-reset-tokens": "1.5s"
+   },
+   1.5
+  ],
+  [
+   {
+    "x-ratelimit-remaining-requests": "0",
+    "x-ratelimit-remaining-tokens": "0",
+    "x-ratelimit-reset-requests": "20ms",
+    "x-ratelimit-reset-tokens": "2s"
+   },
+   2.0
+  ],
+  [
+   {
+    "x-ratelimit-reset-requests": "5s junk"
+   },
+   null
+  ]
+ ],
+ "schemas": [
+  [
+   {
+    "properties": {},
+    "type": "object"
+   },
+   {
+    "name": "response",
+    "schema": {
+     "properties": {},
+     "type": "object"
+    },
+    "strict": true
+   }
+  ],
+  [
+   {
+    "name": "x y",
+    "schema": {
+     "strict": false,
+     "type": "object"
+    }
+   },
+   {
+    "name": "x_y",
+    "schema": {
+     "type": "object"
+    },
+    "strict": false
+   }
+  ],
+  [
+   {
+    "description": null,
+    "name": "",
+    "schema": {
+     "type": "object"
+    },
+    "strict": null
+   },
+   {
+    "name": "response",
+    "schema": {
+     "type": "object"
+    },
+    "strict": true
+   }
+  ],
+  [
+   {
+    "description": "desc",
+    "name": "ok-name_1",
+    "schema": {
+     "type": "object"
+    }
+   },
+   {
+    "description": "desc",
+    "name": "ok-name_1",
+    "schema": {
+     "type": "object"
+    },
+    "strict": true
+   }
+  ],
+  [
+   {
+    "strict": true,
+    "type": "object"
+   },
+   {
+    "name": "response",
+    "schema": {
+     "strict": true,
+     "type": "object"
+    },
+    "strict": true
+   }
+  ],
+  [
+   {
+    "name": "!!!",
+    "schema": {}
+   },
+   {
+    "name": "___",
+    "schema": {
+     "name": "!!!",
+     "schema": {}
+    },
+    "strict": true
+   }
+  ]
+ ],
+ "stream_errors": [
+  [
+   "{\"error\": {\"type\": \"overloaded_error\", \"message\": \"Overloaded\"}}",
+   "OverloadedError",
+   "Overloaded"
+  ],
+  [
+   "{\"error\": {\"code\": \"rate_limit_exceeded\", \"message\": \"slow\"}}",
+   "RateLimitError",
+   "slow"
+  ],
+  [
+   "{\"error\": {\"type\": \"insufficient_quota\"}}",
+   "PaymentRequiredError",
+   "Streaming error: {\"error\": {\"type\": \"insufficient_quota\"}}"
+  ],
+  [
+   "{\"error\": {\"type\": \"server_error\", \"message\": \"boom\"}}",
+   "ServerError",
+   "boom"
+  ],
+  [
+   "{\"error\": \"plain string\"}",
+   "Error",
+   "plain string"
+  ],
+  [
+   "{\"message\": \"top\"}",
+   "Error",
+   "top"
+  ],
+  [
+   "not json",
+   "Error",
+   "not json"
+  ],
+  [
+   "{\"error\": {\"code\": 1302, \"message\": \"1302 too fast\"}}",
+   "Error",
+   "1302 too fast"
+  ]
+ ],
+ "think_tags": [
+  [
+   [
+    "<think>a</think>b"
+   ],
+   "b",
+   "a"
+  ],
+  [
+   [
+    "<thi",
+    "nk>x",
+    "</th",
+    "ink>y"
+   ],
+   "y",
+   "x"
+  ],
+  [
+   [
+    "a<",
+    "b"
+   ],
+   "a<b",
+   null
+  ],
+  [
+   [
+    "<think>unfinished"
+   ],
+   null,
+   "unfinished"
+  ],
+  [
+   [
+    "x</think>y"
+   ],
+   "x</think>y",
+   null
+  ],
+  [
+   [
+    "<think></think><think>z</think>w"
+   ],
+   "w",
+   "z"
+  ],
+  [
+   [
+    "pre<think",
+    ">mid"
+   ],
+   "pre",
+   "mid"
+  ]
+ ],
+ "tool_names": [
+  [
+   "WeatherLookupTool",
+   "weather_lookup"
+  ],
+  [
+   "HTTPTool",
+   "http"
+  ],
+  [
+   "Tool2",
+   "tool2"
+  ],
+  [
+   "Über_Tool",
+   "ber"
+  ],
+  [
+   "Sum$Tool",
+   "sum-tool"
+  ],
+  [
+   "tool",
+   "tool"
+  ]
+ ],
+ "underscore": [
+  [
+   "HTTPProxyTool",
+   "http_proxy_tool"
+  ],
+  [
+   "OpenAI",
+   "open_ai"
+  ],
+  [
+   "getHTTPResponseCode",
+   "get_http_response_code"
+  ],
+  [
+   "ABC",
+   "abc"
+  ],
+  [
+   "a1B2",
+   "a1_b2"
+  ],
+  [
+   "Already_snake",
+   "already_snake"
+  ]
+ ],
+ "url_filenames": [
+  [
+   "https://x.com/a/b.png",
+   "b.png"
+  ],
+  [
+   "https://x.com/",
+   "attachment"
+  ],
+  [
+   "https://x.com/dir/",
+   "attachment"
+  ],
+  [
+   "https://x.com",
+   "attachment"
+  ],
+  [
+   "https://x.com/f.pdf?x=1",
+   "f.pdf"
+  ]
+ ]
+}

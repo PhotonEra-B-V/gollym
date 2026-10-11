@@ -117,7 +117,7 @@ func (a *StreamAccumulator) flushPendingThinkTag() {
 func (a *StreamAccumulator) resolvedCitations() []Citation {
 	out := make([]Citation, 0, len(a.citations))
 	for _, c := range a.citations {
-		if c.Text == nil && c.StartIndex != nil && c.EndIndex != nil {
+		if (c.Text == nil || *c.Text == "") && c.StartIndex != nil && c.EndIndex != nil {
 			s, e := *c.StartIndex, *c.EndIndex
 			if span := pySlice(a.Content, s, e); span != "" {
 				c.Text = &span

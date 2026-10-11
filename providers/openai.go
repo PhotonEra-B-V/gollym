@@ -9,6 +9,7 @@ func openAISpec() *core.ProviderSpec {
 		Options:       []string{"openai_api_key", "openai_api_base", "openai_organization_id", "openai_project_id", "openai_use_system_role"},
 		Requirements:  []string{"openai_api_key"},
 		DeveloperRole: true,
+		Capabilities:  core.DefaultCapabilities{}, // OpenAICapabilities (the base heuristics)
 		APIBase: func(p core.Provider) (string, error) {
 			if v := p.Config().Get("openai_api_base"); v != "" {
 				return v, nil

@@ -8,7 +8,6 @@ import (
 	"net/http"
 	"net/url"
 	"os"
-	"path"
 	"path/filepath"
 	"strings"
 	"sync"
@@ -231,7 +230,7 @@ func (a *Attachment) Format() string {
 
 // Extension is the lowercase filename extension without the dot.
 func (a *Attachment) Extension() string {
-	return strings.ToLower(strings.TrimPrefix(path.Ext(a.Filename), "."))
+	return strings.ToLower(strings.TrimPrefix(pyExt(a.Filename), "."))
 }
 
 // ByteSize returns the size when it is known without reading a URL.
@@ -290,9 +289,9 @@ func (a *Attachment) determineMIME() string {
 func (a *Attachment) sourceFilename() string {
 	switch {
 	case a.URL != "":
-		u, err := url.Parse(a.URL)
-		if err == nil {
-			if base := path.Base(u.Path); base != "" && base != "/" && base != "." {
+		// os.path.basename: the part after the last slash ("" for "/dir/").
+		if u, err := url.Parse(a.URL); err == nil {
+			if base := u.Path[strings.LastIndex(u.Path, "/")+1:]; base != "" {
 				return base
 			}
 		}

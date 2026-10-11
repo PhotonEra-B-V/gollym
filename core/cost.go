@@ -1,5 +1,7 @@
 package core
 
+import "math"
+
 // Cost components.
 var costComponents = []string{"input", "output", "cache_read", "cache_write", "thinking"}
 
@@ -35,18 +37,36 @@ func (c *Cost) Total() *float64 {
 			return nil
 		}
 	}
-	var sum float64
-	any := false
+	var vals []float64
 	for _, comp := range costComponents {
 		if v := c.amountFor(comp); v != nil {
-			sum += *v
-			any = true
+			vals = append(vals, *v)
 		}
 	}
-	if !any {
+	if len(vals) == 0 {
 		return nil
 	}
+	sum := pySum(vals)
 	return &sum
+}
+
+// pySum is Python's sum() of floats, which (since 3.12) uses Neumaier's
+// compensated summation: plain addition differs in the last bits.
+func pySum(vals []float64) float64 {
+	var sum, c float64
+	for _, x := range vals {
+		t := sum + x
+		if math.Abs(sum) >= math.Abs(x) {
+			c += (sum - t) + x
+		} else {
+			c += (x - t) + sum
+		}
+		sum = t
+	}
+	if c != 0 && !math.IsInf(c, 0) && !math.IsNaN(c) {
+		sum += c
+	}
+	return sum
 }
 
 // Map is the to_dict form.
@@ -251,16 +271,14 @@ func AggregateCosts(costs []*Cost) *CostAggregate {
 		}
 	}
 	for _, comp := range costComponents {
-		var sum float64
-		seen := false
+		var vals []float64
 		for _, c := range kept {
 			if v := c.amountFor(comp); v != nil {
-				sum += *v
-				seen = true
+				vals = append(vals, *v)
 			}
 		}
-		if seen && !agg.missing[comp] {
-			s := sum
+		if len(vals) > 0 && !agg.missing[comp] {
+			s := pySum(vals)
 			agg.amounts[comp] = &s
 		}
 	}
@@ -280,16 +298,15 @@ func (a *CostAggregate) Total() *float64 {
 	if !a.tokens || len(a.missing) > 0 {
 		return nil
 	}
-	var sum float64
-	any := false
+	var vals []float64
 	for _, comp := range costComponents {
 		if v := a.amounts[comp]; v != nil {
-			sum += *v
-			any = true
+			vals = append(vals, *v)
 		}
 	}
-	if !any {
+	if len(vals) == 0 {
 		return nil
 	}
+	sum := pySum(vals)
 	return &sum
 }

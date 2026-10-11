@@ -2,7 +2,6 @@ package core
 
 import (
 	"context"
-	"fmt"
 	"log/slog"
 	"reflect"
 	"regexp"
@@ -243,48 +242,4 @@ func ToolArguments(tc *ToolCall) map[string]any {
 	return map[string]any{}
 }
 
-func toolResultString(v any) string {
-	switch x := v.(type) {
-	case string:
-		return x
-	case nil:
-		return "None"
-	case map[string]any, []any:
-		return pyRepr(x)
-	}
-	return fmt.Sprint(v)
-}
-
-// pyRepr approximates Python's str() of dicts/lists (single-quoted keys),
-// which is what pyllym sends for non-content tool results.
-func pyRepr(v any) string {
-	switch x := v.(type) {
-	case nil:
-		return "None"
-	case bool:
-		if x {
-			return "True"
-		}
-		return "False"
-	case string:
-		return "'" + strings.ReplaceAll(strings.ReplaceAll(x, `\`, `\\`), "'", `\'`) + "'"
-	case float64:
-		if x == float64(int64(x)) && x < 1e16 && x > -1e16 {
-			return fmt.Sprintf("%d", int64(x))
-		}
-		return fmt.Sprint(x)
-	case map[string]any:
-		parts := make([]string, 0, len(x))
-		for _, k := range sortedKeys(x) {
-			parts = append(parts, pyRepr(k)+": "+pyRepr(x[k]))
-		}
-		return "{" + strings.Join(parts, ", ") + "}"
-	case []any:
-		parts := make([]string, len(x))
-		for i, e := range x {
-			parts[i] = pyRepr(e)
-		}
-		return "[" + strings.Join(parts, ", ") + "]"
-	}
-	return fmt.Sprint(v)
-}
+func toolResultString(v any) string { return PyStr(v) }

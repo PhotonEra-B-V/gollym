@@ -1,0 +1,992 @@
+{
+ "list_models": [
+  {
+   "capabilities": [
+    "streaming"
+   ],
+   "created_at": "2026-02-17T00:00:00+00:00",
+   "id": "claude-sonnet-4-6",
+   "name": "Claude Sonnet 4.6",
+   "provider": "anthropic"
+  },
+  {
+   "capabilities": [
+    "streaming"
+   ],
+   "created_at": "2026-01-01T00:00:00+00:00",
+   "id": "claude-x",
+   "name": "claude-x",
+   "provider": "anthropic"
+  }
+ ],
+ "list_models_body": {
+  "data": [
+   {
+    "created_at": "2026-02-17T00:00:00Z",
+    "display_name": "Claude Sonnet 4.6",
+    "id": "claude-sonnet-4-6",
+    "type": "model"
+   },
+   {
+    "created_at": "2026-01-01T00:00:00Z",
+    "id": "claude-x",
+    "type": "model"
+   }
+  ],
+  "has_more": false
+ },
+ "parse_body": {
+  "content": [
+   {
+    "signature": "sigA",
+    "thinking": "Let me ",
+    "type": "thinking"
+   },
+   {
+    "thinking": "think.",
+    "type": "thinking"
+   },
+   {
+    "data": "red",
+    "type": "redacted_thinking"
+   },
+   {
+    "citations": [
+     {
+      "cited_text": "Oulu is cold.",
+      "document_index": 0,
+      "document_title": "notes.txt",
+      "end_char_index": 13,
+      "start_char_index": 0,
+      "type": "char_location"
+     }
+    ],
+    "text": "Hyvää päivää. ",
+    "type": "text"
+   },
+   {
+    "citations": [
+     {
+      "cited_text": "Revenue up",
+      "end_block_index": 1,
+      "search_result_index": 1,
+      "source": "https://x.test/q4",
+      "start_block_index": 0,
+      "title": "Q4",
+      "type": "search_result_location"
+     },
+     {
+      "cited_text": "p",
+      "document_index": 2,
+      "document_title": "report.pdf",
+      "end_page_number": 3,
+      "start_page_number": 1,
+      "type": "page_location"
+     },
+     {
+      "cited_text": "w",
+      "title": "Web",
+      "type": "web_search_result_location",
+      "url": "https://web.test"
+     }
+    ],
+    "text": "Revenue rose.",
+    "type": "text"
+   },
+   {
+    "id": "tu1",
+    "input": {
+     "city": "Paris"
+    },
+    "name": "weather",
+    "type": "tool_use"
+   }
+  ],
+  "id": "msg_1",
+  "model": "claude-sonnet-4-6",
+  "stop_reason": "tool_use",
+  "usage": {
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 5,
+    "ephemeral_5m_input_tokens": 10
+   },
+   "cache_read_input_tokens": 30,
+   "input_tokens": 100,
+   "output_tokens": 50,
+   "output_tokens_details": {
+    "thinking_tokens": 20
+   }
+  }
+ },
+ "parse_body2": {
+  "content": [],
+  "model": "claude-sonnet-4-6",
+  "stop_reason": "end_turn",
+  "usage": {
+   "cache_creation_input_tokens": 0,
+   "cache_read_input_tokens": 0,
+   "input_tokens": 3,
+   "output_tokens": 0
+  }
+ },
+ "parse_summary": {
+  "citations": [
+   {
+    "cited_text": "Oulu is cold.",
+    "end_index": 14,
+    "start_index": 0,
+    "text": "Hyvää päivää. ",
+    "title": "notes.txt"
+   },
+   {
+    "cited_text": "Revenue up",
+    "end_index": 27,
+    "source_index": 1,
+    "start_index": 14,
+    "text": "Revenue rose.",
+    "title": "Q4",
+    "url": "https://x.test/q4"
+   },
+   {
+    "cited_text": "p",
+    "end_index": 27,
+    "end_page": 2,
+    "source_index": 2,
+    "start_index": 14,
+    "start_page": 1,
+    "text": "Revenue rose.",
+    "title": "report.pdf"
+   },
+   {
+    "cited_text": "w",
+    "end_index": 27,
+    "start_index": 14,
+    "text": "Revenue rose.",
+    "title": "Web",
+    "url": "https://web.test"
+   }
+  ],
+  "content": "Hyvää päivää. Revenue rose.",
+  "finish_reason": "tool_use",
+  "model_id": "claude-sonnet-4-6",
+  "thinking": {
+   "signature": "sigA",
+   "text": "Let me think."
+  },
+  "tokens": {
+   "cache_creation_tokens": 15,
+   "cached_tokens": 30,
+   "input_tokens": 100,
+   "output_tokens": 50,
+   "thinking_tokens": 20
+  },
+  "tool_calls": {
+   "tu1": {
+    "arguments": {
+     "city": "Paris"
+    },
+    "id": "tu1",
+    "name": "weather"
+   }
+  }
+ },
+ "parse_summary2": {
+  "citations": [],
+  "content": "",
+  "finish_reason": "end_turn",
+  "model_id": "claude-sonnet-4-6",
+  "thinking": null,
+  "tokens": {
+   "cached_tokens": 0,
+   "input_tokens": 3,
+   "output_tokens": 0
+  },
+  "tool_calls": null
+ },
+ "render_effort_none": {
+  "max_tokens": 128000,
+  "messages": [
+   {
+    "content": [
+     {
+      "text": "x",
+      "type": "text"
+     }
+    ],
+    "role": "user"
+   }
+  ],
+  "model": "claude-sonnet-4-6",
+  "stream": false
+ },
+ "render_full": {
+  "max_tokens": 128000,
+  "messages": [
+   {
+    "content": [
+     {
+      "text": "hi",
+      "type": "text"
+     }
+    ],
+    "role": "user"
+   },
+   {
+    "content": [
+     {
+      "signature": "sig1",
+      "thinking": "mull",
+      "type": "thinking"
+     },
+     {
+      "text": "prev",
+      "type": "text"
+     }
+    ],
+    "role": "assistant"
+   },
+   {
+    "content": [
+     {
+      "text": "look",
+      "type": "text"
+     },
+     {
+      "source": {
+       "data": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAA=",
+       "media_type": "image/png",
+       "type": "base64"
+      },
+      "type": "image"
+     },
+     {
+      "citations": {
+       "enabled": true
+      },
+      "source": {
+       "data": "JVBERi0xLjQKJWZha2UK",
+       "media_type": "application/pdf",
+       "type": "base64"
+      },
+      "title": "report.pdf",
+      "type": "document"
+     },
+     {
+      "citations": {
+       "enabled": true
+      },
+      "source": {
+       "data": "Oulu is cold. äö",
+       "media_type": "text/plain",
+       "type": "text"
+      },
+      "title": "notes.txt",
+      "type": "document"
+     }
+    ],
+    "role": "user"
+   },
+   {
+    "content": [
+     {
+      "text": "remote",
+      "type": "text"
+     },
+     {
+      "source": {
+       "type": "url",
+       "url": "https://example.com/cat.png"
+      },
+      "type": "image"
+     },
+     {
+      "citations": {
+       "enabled": true
+      },
+      "source": {
+       "type": "url",
+       "url": "https://example.com/doc.pdf"
+      },
+      "title": "doc.pdf",
+      "type": "document"
+     }
+    ],
+    "role": "user"
+   },
+   {
+    "content": [
+     {
+      "text": "{\"k\": [1, \"\\u00e4\"]}",
+      "type": "text"
+     }
+    ],
+    "role": "assistant"
+   }
+  ],
+  "model": "claude-sonnet-4-6",
+  "output_config": {
+   "effort": "high",
+   "format": {
+    "schema": {
+     "properties": {
+      "a": {
+       "type": "integer"
+      }
+     },
+     "type": "object"
+    },
+    "type": "json_schema"
+   }
+  },
+  "stream": true,
+  "system": [
+   {
+    "text": "You are terse.",
+    "type": "text"
+   },
+   {
+    "cache_control": {
+     "type": "ephemeral"
+    },
+    "text": "cached",
+    "type": "text"
+   }
+  ],
+  "temperature": 0.2,
+  "thinking": {
+   "type": "adaptive"
+  },
+  "tool_choice": {
+   "disable_parallel_tool_use": true,
+   "type": "any"
+  },
+  "tools": [
+   {
+    "description": "Get weather",
+    "input_schema": {
+     "properties": {
+      "city": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "city"
+     ],
+     "type": "object"
+    },
+    "name": "weather"
+   },
+   {
+    "cache_control": {
+     "type": "ephemeral"
+    },
+    "description": null,
+    "input_schema": {
+     "additionalProperties": false,
+     "properties": {},
+     "required": [],
+     "strict": true,
+     "type": "object"
+    },
+    "name": "ping"
+   }
+  ]
+ },
+ "render_haiku": {
+  "max_tokens": 4096,
+  "messages": [
+   {
+    "content": [
+     {
+      "text": "x",
+      "type": "text"
+     }
+    ],
+    "role": "user"
+   }
+  ],
+  "model": "claude-3-haiku-20240307",
+  "stream": false
+ },
+ "render_history": {
+  "max_tokens": 64000,
+  "messages": [
+   {
+    "content": [
+     {
+      "text": "Weather?",
+      "type": "text"
+     }
+    ],
+    "role": "user"
+   },
+   {
+    "content": [
+     {
+      "signature": "s1",
+      "thinking": "t1",
+      "type": "thinking"
+     },
+     {
+      "text": "checking",
+      "type": "text"
+     },
+     {
+      "id": "tu1",
+      "input": {
+       "city": "Paris"
+      },
+      "name": "weather",
+      "type": "tool_use"
+     }
+    ],
+    "role": "assistant"
+   },
+   {
+    "content": [
+     {
+      "content": [
+       {
+        "text": "Sunny",
+        "type": "text"
+       }
+      ],
+      "tool_use_id": "tu1",
+      "type": "tool_result"
+     }
+    ],
+    "role": "user"
+   },
+   {
+    "content": [
+     {
+      "data": "redacted",
+      "type": "redacted_thinking"
+     },
+     {
+      "id": "tu2",
+      "input": {},
+      "name": "search",
+      "type": "tool_use"
+     }
+    ],
+    "role": "assistant"
+   },
+   {
+    "content": [
+     {
+      "content": [
+       {
+        "citations": {
+         "enabled": true
+        },
+        "content": [
+         {
+          "text": "Revenue up",
+          "type": "text"
+         }
+        ],
+        "source": "https://x.test/q4",
+        "title": "Q4",
+        "type": "search_result"
+       },
+       {
+        "citations": {
+         "enabled": true
+        },
+        "content": [
+         {
+          "text": "No url",
+          "type": "text"
+         }
+        ],
+        "source": "Notes",
+        "title": "Notes",
+        "type": "search_result"
+       }
+      ],
+      "tool_use_id": "tu2",
+      "type": "tool_result"
+     }
+    ],
+    "role": "user"
+   },
+   {
+    "content": [
+     {
+      "id": "tu3",
+      "input": {},
+      "name": "noop",
+      "type": "tool_use"
+     }
+    ],
+    "role": "assistant"
+   },
+   {
+    "content": [
+     {
+      "content": [
+       {
+        "text": "(no output)",
+        "type": "text"
+       }
+      ],
+      "tool_use_id": "tu3",
+      "type": "tool_result"
+     }
+    ],
+    "role": "user"
+   },
+   {
+    "content": [
+     {
+      "id": "tu4",
+      "input": {},
+      "name": "raw",
+      "type": "tool_use"
+     }
+    ],
+    "role": "assistant"
+   },
+   {
+    "content": [
+     {
+      "content": "raw",
+      "tool_use_id": "tu4",
+      "type": "tool_result"
+     }
+    ],
+    "role": "user"
+   },
+   {
+    "content": [
+     {
+      "content": [
+       {
+        "text": "{\"ok\": true}",
+        "type": "text"
+       }
+      ],
+      "tool_use_id": "tu5",
+      "type": "tool_result"
+     }
+    ],
+    "role": "user"
+   }
+  ],
+  "model": "claude-3-7-sonnet-20250219",
+  "stream": false,
+  "thinking": {
+   "budget_tokens": 2048,
+   "type": "enabled"
+  },
+  "tool_choice": {
+   "name": "weather",
+   "type": "tool"
+  },
+  "tools": [
+   {
+    "description": "Get weather",
+    "input_schema": {
+     "properties": {
+      "city": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "city"
+     ],
+     "type": "object"
+    },
+    "name": "weather"
+   }
+  ]
+ },
+ "render_history_nothinking": {
+  "max_tokens": 64000,
+  "messages": [
+   {
+    "content": [
+     {
+      "text": "Weather?",
+      "type": "text"
+     }
+    ],
+    "role": "user"
+   },
+   {
+    "content": [
+     {
+      "text": "checking",
+      "type": "text"
+     },
+     {
+      "id": "tu1",
+      "input": {
+       "city": "Paris"
+      },
+      "name": "weather",
+      "type": "tool_use"
+     }
+    ],
+    "role": "assistant"
+   },
+   {
+    "content": [
+     {
+      "content": [
+       {
+        "text": "Sunny",
+        "type": "text"
+       }
+      ],
+      "tool_use_id": "tu1",
+      "type": "tool_result"
+     }
+    ],
+    "role": "user"
+   },
+   {
+    "content": [
+     {
+      "id": "tu2",
+      "input": {},
+      "name": "search",
+      "type": "tool_use"
+     }
+    ],
+    "role": "assistant"
+   },
+   {
+    "content": [
+     {
+      "content": [
+       {
+        "citations": {
+         "enabled": true
+        },
+        "content": [
+         {
+          "text": "Revenue up",
+          "type": "text"
+         }
+        ],
+        "source": "https://x.test/q4",
+        "title": "Q4",
+        "type": "search_result"
+       },
+       {
+        "citations": {
+         "enabled": true
+        },
+        "content": [
+         {
+          "text": "No url",
+          "type": "text"
+         }
+        ],
+        "source": "Notes",
+        "title": "Notes",
+        "type": "search_result"
+       }
+      ],
+      "tool_use_id": "tu2",
+      "type": "tool_result"
+     }
+    ],
+    "role": "user"
+   },
+   {
+    "content": [
+     {
+      "id": "tu3",
+      "input": {},
+      "name": "noop",
+      "type": "tool_use"
+     }
+    ],
+    "role": "assistant"
+   },
+   {
+    "content": [
+     {
+      "content": [
+       {
+        "text": "(no output)",
+        "type": "text"
+       }
+      ],
+      "tool_use_id": "tu3",
+      "type": "tool_result"
+     }
+    ],
+    "role": "user"
+   },
+   {
+    "content": [
+     {
+      "id": "tu4",
+      "input": {},
+      "name": "raw",
+      "type": "tool_use"
+     }
+    ],
+    "role": "assistant"
+   },
+   {
+    "content": [
+     {
+      "content": "raw",
+      "tool_use_id": "tu4",
+      "type": "tool_result"
+     }
+    ],
+    "role": "user"
+   },
+   {
+    "content": [
+     {
+      "content": [
+       {
+        "text": "{\"ok\": true}",
+        "type": "text"
+       }
+      ],
+      "tool_use_id": "tu5",
+      "type": "tool_result"
+     }
+    ],
+    "role": "user"
+   }
+  ],
+  "model": "claude-3-7-sonnet-20250219",
+  "stream": false
+ },
+ "render_nocite": {
+  "max_tokens": 128000,
+  "messages": [
+   {
+    "content": [
+     {
+      "text": "look",
+      "type": "text"
+     },
+     {
+      "text": "<file name='notes.txt' mime_type='text/plain'>Oulu is cold. äö</file>",
+      "type": "text"
+     },
+     {
+      "source": {
+       "data": "JVBERi0xLjQKJWZha2UK",
+       "media_type": "application/pdf",
+       "type": "base64"
+      },
+      "type": "document"
+     }
+    ],
+    "role": "user"
+   }
+  ],
+  "model": "claude-sonnet-4-6",
+  "stream": false
+ },
+ "stream_events": [
+  {
+   "message": {
+    "id": "m",
+    "model": "claude-sonnet-4-6",
+    "usage": {
+     "cache_creation_input_tokens": 3,
+     "cache_read_input_tokens": 7,
+     "input_tokens": 25,
+     "output_tokens": 1
+    }
+   },
+   "type": "message_start"
+  },
+  {
+   "content_block": {
+    "thinking": "",
+    "type": "thinking"
+   },
+   "index": 0,
+   "type": "content_block_start"
+  },
+  {
+   "delta": {
+    "thinking": "Hmm ",
+    "type": "thinking_delta"
+   },
+   "index": 0,
+   "type": "content_block_delta"
+  },
+  {
+   "delta": {
+    "thinking": "ok",
+    "type": "thinking_delta"
+   },
+   "index": 0,
+   "type": "content_block_delta"
+  },
+  {
+   "delta": {
+    "signature": "sigS",
+    "type": "signature_delta"
+   },
+   "index": 0,
+   "type": "content_block_delta"
+  },
+  {
+   "index": 0,
+   "type": "content_block_stop"
+  },
+  {
+   "type": "ping"
+  },
+  {
+   "content_block": {
+    "text": "",
+    "type": "text"
+   },
+   "index": 1,
+   "type": "content_block_start"
+  },
+  {
+   "delta": {
+    "text": "Hel",
+    "type": "text_delta"
+   },
+   "index": 1,
+   "type": "content_block_delta"
+  },
+  {
+   "delta": {
+    "citation": {
+     "cited_text": "c",
+     "document_index": 1,
+     "document_title": "D",
+     "type": "char_location"
+    },
+    "type": "citations_delta"
+   },
+   "index": 1,
+   "type": "content_block_delta"
+  },
+  {
+   "delta": {
+    "text": "lo",
+    "type": "text_delta"
+   },
+   "index": 1,
+   "type": "content_block_delta"
+  },
+  {
+   "content_block": {
+    "id": "tu9",
+    "input": {},
+    "name": "weather",
+    "type": "tool_use"
+   },
+   "index": 2,
+   "type": "content_block_start"
+  },
+  {
+   "delta": {
+    "partial_json": "",
+    "type": "input_json_delta"
+   },
+   "index": 2,
+   "type": "content_block_delta"
+  },
+  {
+   "delta": {
+    "partial_json": "{\"city\": ",
+    "type": "input_json_delta"
+   },
+   "index": 2,
+   "type": "content_block_delta"
+  },
+  {
+   "delta": {
+    "partial_json": "\"Oulu\"}",
+    "type": "input_json_delta"
+   },
+   "index": 2,
+   "type": "content_block_delta"
+  },
+  {
+   "index": 2,
+   "type": "content_block_stop"
+  },
+  {
+   "delta": {
+    "stop_reason": "tool_use",
+    "stop_sequence": null
+   },
+   "type": "message_delta",
+   "usage": {
+    "output_tokens": 42
+   }
+  },
+  {
+   "type": "message_stop"
+  }
+ ],
+ "stream_summary": {
+  "citations": [
+   {
+    "cited_text": "c",
+    "source_index": 1,
+    "title": "D"
+   }
+  ],
+  "content": "Hello",
+  "finish_reason": "tool_use",
+  "model_id": "claude-sonnet-4-6",
+  "thinking": {
+   "signature": "sigS",
+   "text": "Hmm ok"
+  },
+  "tokens": {
+   "cache_creation_tokens": 3,
+   "cached_tokens": 7,
+   "input_tokens": 25,
+   "output_tokens": 42
+  },
+  "tool_calls": {
+   "tu9": {
+    "arguments": {
+     "city": "Oulu"
+    },
+    "id": "tu9",
+    "name": "weather"
+   }
+  }
+ },
+ "thinking_errors": {
+  "claude-3-7-sonnet-20250219": "Anthropic thinking effort is not supported for claude-3-7-sonnet-20250219",
+  "claude-3-haiku-20240307": "Anthropic thinking budget is not supported for claude-3-haiku-20240307",
+  "claude-sonnet-4-6": "Anthropic adaptive thinking requires an effort"
+ },
+ "tool_choices": {
+  "None|one": {
+   "disable_parallel_tool_use": true,
+   "type": "auto"
+  },
+  "auto|None": {
+   "type": "auto"
+  },
+  "none|many": {
+   "type": "none"
+  },
+  "required|many": {
+   "disable_parallel_tool_use": false,
+   "type": "any"
+  },
+  "weather|one": {
+   "disable_parallel_tool_use": true,
+   "name": "weather",
+   "type": "tool"
+  }
+ }
+}

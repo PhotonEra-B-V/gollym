@@ -29,18 +29,24 @@ type Question struct {
 
 // ChoiceQuestion picks one label (labels in order, each with a description).
 func ChoiceQuestion(labels []string, descriptions map[string]string, instructions string) (Question, error) {
-	if len(labels) < 2 {
-		return Question{}, errors.New("A choice question needs at least two options")
-	}
+	// Labels are dict keys in pyllym: duplicates collapse.
+	var uniq []string
 	ch := map[string]string{}
 	for _, l := range labels {
+		if _, dup := ch[l]; dup {
+			continue
+		}
+		uniq = append(uniq, l)
 		if d, ok := descriptions[l]; ok {
 			ch[l] = d
 		} else {
 			ch[l] = l
 		}
 	}
-	return Question{Type: QuestionChoice, Instructions: instructions, Labels: labels, Choices: ch}, nil
+	if len(uniq) < 2 {
+		return Question{}, errors.New("A choice question needs at least two options")
+	}
+	return Question{Type: QuestionChoice, Instructions: instructions, Labels: uniq, Choices: ch}, nil
 }
 
 // ScoreQuestion places the state on an ordered scale.

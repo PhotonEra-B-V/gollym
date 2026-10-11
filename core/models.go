@@ -10,6 +10,7 @@ import (
 	"strings"
 	"sync"
 	"time"
+	"unicode"
 )
 
 //go:embed models.json
@@ -209,12 +210,13 @@ func NewInfo(data map[string]any) *Info {
 
 // DefaultInfo is the assumed record for a model missing from the registry.
 func DefaultInfo(modelID, provider string) *Info {
-	name := strings.ReplaceAll(modelID, "-", " ")
-	if name != "" {
-		name = strings.ToUpper(name[:1]) + strings.ToLower(name[1:])
+	// Python's str.capitalize: first character upper, the rest lower.
+	name := []rune(strings.ToLower(strings.ReplaceAll(modelID, "-", " ")))
+	if len(name) > 0 {
+		name[0] = unicode.ToUpper(name[0])
 	}
 	return NewInfo(map[string]any{
-		"id": modelID, "name": name, "provider": provider,
+		"id": modelID, "name": string(name), "provider": provider,
 		"capabilities": []any{"function_calling", "streaming", "vision", "structured_output"},
 		"modalities":   map[string]any{"input": []any{"text", "image"}, "output": []any{"text"}},
 		"metadata":     map[string]any{"warning": "Assuming model exists, capabilities may not be accurate"},

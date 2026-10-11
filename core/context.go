@@ -297,3 +297,46 @@ func nonNilMap(m map[string]any) map[string]any {
 	}
 	return m
 }
+
+// The facade functions scoped to this context (pyllym's Context.embed,
+// .paint, ...): each sets the options' Context to c.
+
+func (c *Context) Embed(ctx context.Context, text any, o EmbedOptions) (*Embedding, error) {
+	o.Context = c
+	return Embed(ctx, text, o)
+}
+
+func (c *Context) Moderate(ctx context.Context, input any, o ModelOptions) (*Moderation, error) {
+	o.Context = c
+	return Moderate(ctx, input, o)
+}
+
+func (c *Context) Paint(ctx context.Context, prompt string, o PaintRequest) (*Image, error) {
+	o.Context = c
+	return Paint(ctx, prompt, o)
+}
+
+func (c *Context) Animate(ctx context.Context, prompt string, o AnimateRequest) (*Video, error) {
+	o.Context = c
+	return Animate(ctx, prompt, o)
+}
+
+func (c *Context) Speak(ctx context.Context, input string, o SpeakRequest) (*Speech, error) {
+	o.Context = c
+	return Speak(ctx, input, o)
+}
+
+func (c *Context) Transcribe(ctx context.Context, audioFile string, o TranscribeRequest) (*Transcription, error) {
+	o.Context = c
+	return Transcribe(ctx, audioFile, o)
+}
+
+func (c *Context) Upload(ctx context.Context, file any, o FileOptions, opts map[string]any) (*UploadedFile, error) {
+	o.Context = c
+	return Upload(ctx, file, o, opts)
+}
+
+func (c *Context) Download(ctx context.Context, id string, o FileOptions) ([]byte, error) {
+	o.Context = c
+	return Download(ctx, id, o)
+}

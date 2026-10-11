@@ -72,13 +72,16 @@ func BuildThinking(text, signature string) *Thinking {
 	return &Thinking{Text: text, Signature: signature}
 }
 
-// String keeps signatures out of logs.
+// String keeps signatures out of logs (pyllym's Thinking.__repr__).
 func (t *Thinking) String() string {
-	sig := "<nil>"
-	if t.Signature != "" {
-		sig = "[REDACTED]"
+	text, sig := "None", "None"
+	if t.Text != "" {
+		text = pyQuote(t.Text)
 	}
-	return "Thinking(text=" + t.Text + ", signature=" + sig + ")"
+	if t.Signature != "" {
+		sig = "'[REDACTED]'"
+	}
+	return "Thinking(text=" + text + ", signature=" + sig + ")"
 }
 
 // ThinkingConfig requests reasoning across providers.
@@ -102,6 +105,46 @@ type Citation struct {
 	SourceIndex *int    `json:"source_index,omitempty"`
 	StartPage   *int    `json:"start_page,omitempty"`
 	EndPage     *int    `json:"end_page,omitempty"`
+}
+
+// Map is the to_dict form (nil fields omitted).
+func (c Citation) Map() map[string]any {
+	out := map[string]any{}
+	putS := func(k string, v *string) {
+		if v != nil {
+			out[k] = *v
+		}
+	}
+	putI := func(k string, v *int) {
+		if v != nil {
+			out[k] = *v
+		}
+	}
+	putS("url", c.URL)
+	putS("title", c.Title)
+	putS("cited_text", c.CitedText)
+	putS("text", c.Text)
+	putI("start_index", c.StartIndex)
+	putI("end_index", c.EndIndex)
+	putI("source_index", c.SourceIndex)
+	putI("start_page", c.StartPage)
+	putI("end_page", c.EndPage)
+	return out
+}
+
+// CitationFromMap is Citation.from_dict: known keys are read, others ignored.
+func CitationFromMap(d map[string]any) Citation {
+	str := func(k string) *string {
+		if s, ok := d[k].(string); ok {
+			return &s
+		}
+		return nil
+	}
+	return Citation{
+		URL: str("url"), Title: str("title"), CitedText: str("cited_text"), Text: str("text"),
+		StartIndex: AsInt(d["start_index"]), EndIndex: AsInt(d["end_index"]),
+		SourceIndex: AsInt(d["source_index"]), StartPage: AsInt(d["start_page"]), EndPage: AsInt(d["end_page"]),
+	}
 }
 
 // Equal is value equality (citations are deduplicated by value).
@@ -130,7 +173,12 @@ type ToolCall struct {
 
 // Map is the to_dict form.
 func (tc *ToolCall) Map() map[string]any {
-	out := map[string]any{"arguments": tc.Arguments}
+	// Unset arguments are pyllym's default_factory dict.
+	args := tc.Arguments
+	if args == nil {
+		args = map[string]any{}
+	}
+	out := map[string]any{"arguments": args}
 	if tc.ID != "" {
 		out["id"] = tc.ID
 	}

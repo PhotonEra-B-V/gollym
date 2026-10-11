@@ -1,0 +1,853 @@
+{
+ "features": {
+  "embedding_payload": {
+   "dimensions": 256,
+   "input": [
+    "a",
+    "b"
+   ],
+   "model": "text-embedding-3-small"
+  },
+  "list_models_deepseek": [
+   {
+    "capabilities": [],
+    "context_window": null,
+    "created_at": null,
+    "family": null,
+    "id": "gpt-x",
+    "knowledge_cutoff": null,
+    "max_output_tokens": null,
+    "metadata": {
+     "object": "model",
+     "owned_by": "openai"
+    },
+    "modalities": {
+     "input": [],
+     "output": []
+    },
+    "name": "gpt-x",
+    "pricing": {},
+    "provider": "deepseek"
+   },
+   {
+    "capabilities": [],
+    "context_window": null,
+    "created_at": null,
+    "family": null,
+    "id": "other",
+    "knowledge_cutoff": null,
+    "max_output_tokens": null,
+    "metadata": {
+     "object": "model",
+     "owned_by": "sys"
+    },
+    "modalities": {
+     "input": [],
+     "output": []
+    },
+    "name": "other",
+    "pricing": {},
+    "provider": "deepseek"
+   }
+  ],
+  "list_models_openai": [
+   {
+    "capabilities": [
+     "streaming"
+    ],
+    "context_window": null,
+    "created_at": null,
+    "family": null,
+    "id": "gpt-x",
+    "knowledge_cutoff": null,
+    "max_output_tokens": null,
+    "metadata": {
+     "object": "model",
+     "owned_by": "openai"
+    },
+    "modalities": {
+     "input": [],
+     "output": []
+    },
+    "name": "gpt-x",
+    "pricing": {},
+    "provider": "openai"
+   },
+   {
+    "capabilities": [
+     "streaming"
+    ],
+    "context_window": null,
+    "created_at": null,
+    "family": null,
+    "id": "other",
+    "knowledge_cutoff": null,
+    "max_output_tokens": null,
+    "metadata": {
+     "object": "model",
+     "owned_by": "sys"
+    },
+    "modalities": {
+     "input": [],
+     "output": []
+    },
+    "name": "other",
+    "pricing": {},
+    "provider": "openai"
+   }
+  ],
+  "models_body": {
+   "data": [
+    {
+     "created": 1700000000,
+     "id": "gpt-x",
+     "object": "model",
+     "owned_by": "openai"
+    },
+    {
+     "id": "other",
+     "object": "model",
+     "owned_by": "sys"
+    }
+   ],
+   "object": "list"
+  },
+  "speech_payload": {
+   "extra": 1,
+   "input": "hello",
+   "instructions": "calm",
+   "model": "gpt-4o-mini-tts",
+   "response_format": "wav",
+   "speed": 1.25,
+   "voice": "alloy"
+  },
+  "transcription_data": {
+   "language": "fi",
+   "model": "whisper-1",
+   "prompt": "names",
+   "response_format": "verbose_json",
+   "temperature": "0.0"
+  },
+  "transcription_file": "clip.mp3"
+ },
+ "parse": {
+  "blocks_deepseek_search": {
+   "message": {
+    "cache_creation_tokens": 0,
+    "cached_tokens": 7,
+    "citations": [
+     {
+      "cited_text": "snip",
+      "source_index": 0,
+      "title": "S",
+      "url": "https://s"
+     }
+    ],
+    "content": "cd",
+    "finish_reason": "length",
+    "input_tokens": 3,
+    "model_id": "deepseek-chat",
+    "output_tokens": 5,
+    "role": "assistant",
+    "thinking": "ab",
+    "thinking_signature": "rs"
+   },
+   "response": {
+    "choices": [
+     {
+      "finish_reason": "length",
+      "message": {
+       "content": [
+        {
+         "thinking": [
+          {
+           "text": "a",
+           "type": "text"
+          },
+          {
+           "text": "no",
+           "type": "x"
+          }
+         ],
+         "type": "thinking"
+        },
+        {
+         "thinking": "b",
+         "type": "thinking"
+        },
+        {
+         "text": "c",
+         "type": "text"
+        },
+        {
+         "text": "d",
+         "type": "text"
+        }
+       ],
+       "reasoning_signature": "rs",
+       "role": "assistant"
+      }
+     }
+    ],
+    "model": "deepseek-chat",
+    "search_results": [
+     {
+      "snippet": "snip",
+      "title": "S",
+      "url": "https://s"
+     },
+     "junk"
+    ],
+    "usage": {
+     "completion_tokens": 2,
+     "prompt_cache_hit_tokens": 7,
+     "prompt_cache_miss_tokens": 3,
+     "prompt_tokens": 10,
+     "total_tokens": 15
+    }
+   }
+  },
+  "no_usage_reasoning": {
+   "message": {
+    "cache_creation_tokens": 0,
+    "citations": [],
+    "content": "x",
+    "role": "assistant",
+    "thinking": "why"
+   },
+   "response": {
+    "choices": [
+     {
+      "message": {
+       "content": "x",
+       "reasoning_content": "why",
+       "role": "assistant"
+      }
+     }
+    ]
+   }
+  },
+  "root_citations": {
+   "message": {
+    "cache_creation_tokens": 0,
+    "citations": [
+     {
+      "source_index": 0,
+      "url": "https://one"
+     },
+     {
+      "source_index": 2,
+      "url": "https://two"
+     }
+    ],
+    "content": "c",
+    "finish_reason": "stop",
+    "input_tokens": 1,
+    "model_id": "sonar",
+    "output_tokens": 1,
+    "role": "assistant"
+   },
+   "response": {
+    "choices": [
+     {
+      "finish_reason": "stop",
+      "message": {
+       "content": "c",
+       "role": "assistant"
+      }
+     }
+    ],
+    "citations": [
+     "https://one",
+     2,
+     "https://two"
+    ],
+    "model": "sonar",
+    "usage": {
+     "completion_tokens": 1,
+     "prompt_tokens": 1
+    }
+   }
+  },
+  "think_usage_annotations": {
+   "message": {
+    "cache_creation_tokens": 10,
+    "cached_tokens": 30,
+    "citations": [
+     {
+      "end_index": 6,
+      "start_index": 0,
+      "text": "Answer",
+      "title": "A",
+      "url": "https://a"
+     }
+    ],
+    "content": "Answer here",
+    "finish_reason": "stop",
+    "input_tokens": 60,
+    "model_id": "gpt-4o",
+    "output_tokens": 30,
+    "role": "assistant",
+    "thinking": "hmm",
+    "thinking_tokens": 5
+   },
+   "response": {
+    "choices": [
+     {
+      "finish_reason": "stop",
+      "message": {
+       "annotations": [
+        {
+         "type": "url_citation",
+         "url_citation": {
+          "end_index": 6,
+          "start_index": 0,
+          "title": "A",
+          "url": "https://a"
+         }
+        }
+       ],
+       "content": "<think>hmm</think>  Answer here",
+       "role": "assistant"
+      }
+     }
+    ],
+    "model": "gpt-4o",
+    "usage": {
+     "completion_tokens": 20,
+     "completion_tokens_details": {
+      "reasoning_tokens": 5
+     },
+     "prompt_tokens": 100,
+     "prompt_tokens_details": {
+      "cache_write_tokens": 10,
+      "cached_tokens": 30
+     },
+     "total_tokens": 130
+    }
+   }
+  },
+  "tool_calls": {
+   "message": {
+    "cache_creation_tokens": 0,
+    "citations": [],
+    "content": "",
+    "finish_reason": "tool_calls",
+    "input_tokens": 5,
+    "model_id": "gemini-2.5-flash",
+    "output_tokens": 1,
+    "role": "assistant",
+    "tool_calls": {
+     "a": {
+      "arguments": {
+       "x": 1
+      },
+      "id": "a",
+      "name": "f",
+      "thought_signature": "ts"
+     },
+     "b": {
+      "arguments": {},
+      "id": "b",
+      "name": "g"
+     }
+    }
+   },
+   "response": {
+    "choices": [
+     {
+      "finish_reason": "tool_calls",
+      "message": {
+       "content": null,
+       "role": "assistant",
+       "tool_calls": [
+        {
+         "extra_content": {
+          "google": {
+           "thought_signature": "ts"
+          }
+         },
+         "function": {
+          "arguments": "{\"x\": 1}",
+          "name": "f"
+         },
+         "id": "a",
+         "type": "function"
+        },
+        {
+         "function": {
+          "arguments": "",
+          "name": "g"
+         },
+         "id": "b",
+         "type": "function"
+        }
+       ]
+      }
+     }
+    ],
+    "model": "gemini-2.5-flash",
+    "usage": {
+     "completion_tokens": 1,
+     "prompt_tokens": 5
+    }
+   }
+  }
+ },
+ "render": {
+  "bare_schema": {
+   "messages": [
+    {
+     "content": "hi",
+     "role": "user"
+    }
+   ],
+   "model": "gpt-4o",
+   "response_format": {
+    "json_schema": {
+     "name": "response",
+     "schema": {
+      "properties": {
+       "x": {
+        "type": "integer"
+       }
+      },
+      "strict": false,
+      "type": "object"
+     },
+     "strict": false
+    },
+    "type": "json_schema"
+   },
+   "stream": false
+  },
+  "conversation": {
+   "messages": [
+    {
+     "content": "sys",
+     "role": "system"
+    },
+    {
+     "content": "weather?",
+     "role": "user"
+    },
+    {
+     "content": "",
+     "reasoning": "let me check",
+     "reasoning_content": "let me check",
+     "reasoning_signature": "sig1",
+     "role": "assistant",
+     "tool_calls": [
+      {
+       "function": {
+        "arguments": "{\"city\": \"Paris\", \"note\": \"\\u00e9<>&\"}",
+        "name": "weather"
+       },
+       "id": "call_1",
+       "type": "function"
+      }
+     ]
+    },
+    {
+     "content": "Sunny",
+     "role": "tool",
+     "tool_call_id": "call_1"
+    },
+    {
+     "content": "",
+     "reasoning": "done thinking",
+     "reasoning_content": "done thinking",
+     "role": "assistant"
+    },
+    {
+     "content": [
+      {
+       "text": "look",
+       "type": "text"
+      },
+      {
+       "text": "<file name='notes.txt' mime_type='text/plain'>hello file\n</file>",
+       "type": "text"
+      },
+      {
+       "file": {
+        "file_data": "data:application/pdf;base64,JVBERi0xLjQgdGVzdA==",
+        "filename": "doc.pdf"
+       },
+       "type": "file"
+      },
+      {
+       "image_url": {
+        "url": "https://example.com/cat.png"
+       },
+       "type": "image_url"
+      },
+      {
+       "image_url": {
+        "url": "data:image/png;base64,iVBORw0KGgpmYWtlcG5n"
+       },
+       "type": "image_url"
+      }
+     ],
+     "role": "user"
+    },
+    {
+     "content": "{\"k\": [1, 2]}",
+     "role": "user"
+    },
+    {
+     "content": [
+      {
+       "text": "raw",
+       "type": "text"
+      }
+     ],
+     "role": "user"
+    }
+   ],
+   "model": "deepseek-chat",
+   "stream": false
+  },
+  "schema_thinking": {
+   "messages": [
+    {
+     "content": "hi",
+     "role": "user"
+    }
+   ],
+   "model": "o3",
+   "reasoning_effort": "high",
+   "response_format": {
+    "json_schema": {
+     "name": "My_Schema_",
+     "schema": {
+      "properties": {
+       "a": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "a"
+      ],
+      "type": "object"
+     },
+     "strict": false
+    },
+    "type": "json_schema"
+   },
+   "stream": false,
+   "temperature": 1.0
+  },
+  "search_temperature": {
+   "messages": [
+    {
+     "content": "hi",
+     "role": "user"
+    }
+   ],
+   "model": "gpt-4o-search-preview",
+   "stream": false
+  },
+  "stream": {
+   "messages": [
+    {
+     "content": "hi",
+     "role": "user"
+    }
+   ],
+   "model": "gpt-4o",
+   "stream": true,
+   "stream_options": {
+    "include_usage": true
+   }
+  },
+  "tools_params": {
+   "max_tokens": 100,
+   "messages": [
+    {
+     "content": "be terse",
+     "role": "developer"
+    },
+    {
+     "content": "hi",
+     "role": "user"
+    }
+   ],
+   "metadata": {
+    "a": {
+     "b": 1
+    }
+   },
+   "model": "gpt-4o",
+   "parallel_tool_calls": false,
+   "stream": false,
+   "temperature": 0.7,
+   "tool_choice": {
+    "function": {
+     "name": "weather"
+    },
+    "type": "function"
+   },
+   "tools": [
+    {
+     "function": {
+      "description": "Get weather",
+      "name": "weather",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "city": {
+         "description": "City name",
+         "type": "string"
+        },
+        "days": {
+         "type": "integer"
+        }
+       },
+       "required": [
+        "city"
+       ],
+       "strict": true,
+       "type": "object"
+      }
+     },
+     "type": "function"
+    },
+    {
+     "function": {
+      "description": null,
+      "name": "ping",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {},
+       "required": [],
+       "strict": true,
+       "type": "object"
+      }
+     },
+     "type": "function"
+    },
+    {
+     "function": {
+      "description": "Tagged",
+      "name": "tagged",
+      "parameters": {
+       "additionalProperties": false,
+       "properties": {
+        "q": {
+         "type": "string"
+        }
+       },
+       "required": [
+        "q"
+       ],
+       "strict": true,
+       "type": "object"
+      },
+      "strict": false
+     },
+     "type": "function",
+     "x_extra": 1
+    }
+   ]
+  }
+ },
+ "stream": {
+  "think_tags_and_usage": {
+   "chunks": [
+    {
+     "choices": [
+      {
+       "delta": {
+        "content": "Hi <th",
+        "role": "assistant"
+       }
+      }
+     ],
+     "model": "gpt-4o"
+    },
+    {
+     "choices": [
+      {
+       "delta": {
+        "content": "ink>inner</thi"
+       }
+      }
+     ]
+    },
+    {
+     "choices": [
+      {
+       "delta": {
+        "content": "nk> there"
+       }
+      }
+     ]
+    },
+    {
+     "choices": [
+      {
+       "delta": {
+        "reasoning_content": "R1",
+        "reasoning_signature": "s1"
+       }
+      }
+     ]
+    },
+    {
+     "choices": [
+      {
+       "delta": {
+        "reasoning": "R2",
+        "reasoning_signature": "s2"
+       }
+      }
+     ]
+    },
+    {
+     "choices": [
+      {
+       "delta": {
+        "annotations": [
+         {
+          "url_citation": {
+           "end_index": 2,
+           "start_index": 0,
+           "url": "https://u"
+          }
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "choices": [
+      {
+       "delta": {},
+       "finish_reason": "stop"
+      }
+     ]
+    },
+    {
+     "choices": [],
+     "usage": {
+      "completion_tokens": 4,
+      "prompt_tokens": 9,
+      "prompt_tokens_details": {
+       "cached_tokens": 2
+      },
+      "total_tokens": 13
+     }
+    }
+   ],
+   "message": {
+    "cached_tokens": 2,
+    "citations": [
+     {
+      "end_index": 2,
+      "start_index": 0,
+      "text": "Hi",
+      "url": "https://u"
+     }
+    ],
+    "content": "Hi  there",
+    "finish_reason": "stop",
+    "input_tokens": 7,
+    "model_id": "gpt-4o",
+    "output_tokens": 4,
+    "role": "assistant",
+    "thinking": "innerR1R2",
+    "thinking_signature": "s1"
+   }
+  },
+  "tool_call_fragments": {
+   "chunks": [
+    {
+     "choices": [
+      {
+       "delta": {
+        "tool_calls": [
+         {
+          "function": {
+           "arguments": "",
+           "name": "weather"
+          },
+          "id": "call_a",
+          "index": 0,
+          "type": "function"
+         }
+        ]
+       }
+      }
+     ],
+     "model": "gpt-4o"
+    },
+    {
+     "choices": [
+      {
+       "delta": {
+        "tool_calls": [
+         {
+          "function": {
+           "arguments": "{\"city\":"
+          },
+          "id": null,
+          "index": 0
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "choices": [
+      {
+       "delta": {
+        "tool_calls": [
+         {
+          "function": {
+           "arguments": "\"Oslo\"}"
+          },
+          "id": null,
+          "index": 0
+         }
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "choices": [
+      {
+       "delta": {},
+       "finish_reason": "tool_calls"
+      }
+     ],
+     "usage": {
+      "completion_tokens": 7,
+      "prompt_tokens": 3
+     }
+    }
+   ],
+   "message": {
+    "citations": [],
+    "content": "",
+    "finish_reason": "tool_calls",
+    "input_tokens": 3,
+    "model_id": "gpt-4o",
+    "output_tokens": 7,
+    "role": "assistant",
+    "tool_calls": {
+     "call_a": {
+      "arguments": {
+       "city": "Oslo"
+      },
+      "id": "call_a",
+      "name": "weather"
+     }
+    }
+   }
+  }
+ }
+}

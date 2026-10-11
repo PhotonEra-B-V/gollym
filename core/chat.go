@@ -370,9 +370,10 @@ func NormalizeSchema(raw map[string]any) map[string]any {
 		return nil
 	}
 	schema := DeepCopy(raw).(map[string]any)
+	// schema.get("schema") or schema: an empty inner schema falls back.
 	inner, _ := schema["schema"].(map[string]any)
 	var def map[string]any
-	if inner != nil {
+	if len(inner) > 0 {
 		def = DeepCopy(inner).(map[string]any)
 	} else {
 		def = DeepCopy(schema).(map[string]any)
@@ -463,11 +464,13 @@ func (c *Chat) AddMessage(m *Message) (*Message, error) {
 		return nil, err
 	}
 	if c.Provider != nil {
-		if proto, err := c.Provider.Protocol(c.protocol, c.Model); err == nil {
-			if pp, ok := proto.(MessagePreprocessor); ok {
-				if msg, err = pp.PreprocessMessage(msg); err != nil {
-					return nil, err
-				}
+		proto, err := c.Provider.Protocol(c.protocol, c.Model)
+		if err != nil {
+			return nil, err
+		}
+		if pp, ok := proto.(MessagePreprocessor); ok {
+			if msg, err = pp.PreprocessMessage(msg); err != nil {
+				return nil, err
 			}
 		}
 	}
