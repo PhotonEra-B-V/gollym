@@ -245,7 +245,8 @@ func Underscore(name string) string {
 }
 
 // ToTime parses ISO timestamps (pyllym utils.to_time). Like Python's
-// datetime.fromisoformat it doesn't read unix seconds: those are nil.
+// datetime.fromisoformat it doesn't read unix seconds: those are nil. Unlike
+// it, it reads models.json's "2006-01-02 15:04:05 UTC", which pyllym drops.
 func ToTime(v any) *time.Time {
 	switch x := v.(type) {
 	case nil:
@@ -258,7 +259,7 @@ func ToTime(v any) *time.Time {
 			return nil
 		}
 		s = strings.Replace(s, "Z", "+00:00", 1)
-		for _, layout := range []string{time.RFC3339Nano, "2006-01-02T15:04:05-07:00", "2006-01-02T15:04:05", "2006-01-02 15:04:05-07:00", "2006-01-02 15:04:05", "2006-01-02"} {
+		for _, layout := range []string{time.RFC3339Nano, "2006-01-02T15:04:05-07:00", "2006-01-02T15:04:05", "2006-01-02 15:04:05-07:00", "2006-01-02 15:04:05 UTC", "2006-01-02 15:04:05", "2006-01-02"} {
 			if t, err := time.Parse(layout, s); err == nil {
 				return &t
 			}

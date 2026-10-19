@@ -91,13 +91,18 @@ func FetchMerged(ctx context.Context, existing []*core.Info, opts Options) ([]*c
 	for _, m := range merged {
 		out = append(out, m)
 	}
+	sortModels(out)
+	return out, report
+}
+
+// sortModels orders models by provider, then id.
+func sortModels(out []*core.Info) {
 	sort.Slice(out, func(a, b int) bool {
 		if out[a].Provider != out[b].Provider {
 			return out[a].Provider < out[b].Provider
 		}
 		return out[a].ID < out[b].ID
 	})
-	return out, report
 }
 
 // Refresh replaces reg's models with FetchMerged's result.
@@ -106,6 +111,9 @@ func Refresh(ctx context.Context, reg *core.Registry, opts Options) Report {
 	reg.Replace(models)
 	return report
 }
+
+// createdAtLayout is how models.json writes created_at.
+const createdAtLayout = "2006-01-02 15:04:05 UTC"
 
 // infoKeys is Info.to_dict's key order, kept so saved files diff cleanly
 // against pyllym's.
@@ -116,7 +124,10 @@ var infoKeys = []string{
 
 // Marshal renders models as models.json: a list of to_dict records,
 // indented by two spaces. Nested objects have sorted keys, so the output
-// is JSON-equal (not byte-equal) to pyllym's save_to_json.
+// is JSON-equal (not byte-equal) to pyllym's save_to_json. created_at keeps
+// the registry's "2006-01-02 15:04:05 UTC" form (pyllym writes "+00:00"
+// and can't read its own registry's dates back) so saves don't rewrite
+// every date.
 func Marshal(models []*core.Info) ([]byte, error) {
 	var b bytes.Buffer
 	b.WriteString("[")
@@ -126,6 +137,9 @@ func Marshal(models []*core.Info) ([]byte, error) {
 		}
 		b.WriteString("\n  {")
 		d := m.Map()
+		if m.CreatedAt != nil {
+			d["created_at"] = m.CreatedAt.UTC().Format(createdAtLayout)
+		}
 		for k, key := range infoKeys {
 			v, err := marshalIndent(d[key], "    ")
 			if err != nil {

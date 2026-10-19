@@ -19,7 +19,7 @@ func init() {
 }
 
 const modelsUsage = `usage:
-  gollym models refresh [--remote-only] [--out path] [--registry path]
+  gollym models refresh [--remote-only] [--no-models-dev] [--out path] [--registry path]
   gollym models list [--provider p] [--registry path]
 `
 
@@ -50,14 +50,20 @@ func loadRegistry(path string) (*core.Registry, error) {
 // refreshProviders overrides the configured providers (tests).
 var refreshProviders []*core.ProviderSpec
 
+// modelsDevURL is where refresh reads models.dev (tests point it at a stub).
+var modelsDevURL = registry.ModelsDevURL
+
 // modelsRefresh merges every configured provider's model listing into the
-// registry and saves it (models.refresh + models.save_to_json).
+// registry, layers models.dev and the local overrides over it, and saves it
+// (models.refresh + models.save_to_json, plus the models.dev step pyllym
+// lacks).
 func modelsRefresh(ctx context.Context, args []string, stdout, stderr io.Writer) error {
 	fs := flag.NewFlagSet("models refresh", flag.ContinueOnError)
 	fs.SetOutput(stderr)
 	remoteOnly := fs.Bool("remote-only", false, "skip local providers (Ollama, GPUStack, ...)")
 	out := fs.String("out", "", "file to write (default: --registry, else ./models.json)")
 	from := fs.String("registry", "", "models.json to start from (default: the embedded registry)")
+	noModelsDev := fs.Bool("no-models-dev", false, "don't merge models.dev (only provider listings)")
 	if err := fs.Parse(args); err != nil {
 		return err
 	}
@@ -86,6 +92,20 @@ func modelsRefresh(ctx context.Context, args []string, stdout, stderr io.Writer)
 	sort.Strings(failed)
 	for _, slug := range failed {
 		fmt.Fprintf(stderr, "skipped %s: %v\n", slug, report.Failed[slug])
+	}
+	if !*noModelsDev {
+		overrides, err := registry.Overrides()
+		if err != nil {
+			return err
+		}
+		if cat, err := registry.FetchModelsDev(ctx, nil, modelsDevURL); err != nil {
+			fmt.Fprintf(stderr, "skipped models.dev: %v\n", err)
+		} else {
+			models, r := registry.MergeModelsDev(reg.All(), cat, overrides)
+			reg.Replace(models)
+			fmt.Fprintf(stderr, "models.dev: %d added, %d updated, %d unchanged, %d hand-curated kept\n",
+				r.Added, r.Updated, r.Unchanged, r.Skipped)
+		}
 	}
 	if err := registry.Save(reg, dest); err != nil {
 		return err
