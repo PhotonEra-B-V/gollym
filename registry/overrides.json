@@ -1,0 +1,17 @@
+{
+  "anthropic:claude-sonnet-4-5": {
+    "reason": "1M context (pyllym CHANGELOG); models.dev lists the 200K default",
+    "set": {"context_window": 1000000, "metadata": {"limit": {"context": 1000000}}}
+  },
+  "anthropic:claude-sonnet-4-5-20250929": {
+    "reason": "1M context (pyllym CHANGELOG); models.dev lists the 200K default",
+    "set": {"context_window": 1000000, "metadata": {"limit": {"context": 1000000}}}
+  },
+  "anthropic:claude-sonnet-5-5": {
+    "reason": "cache reads are $0.20/MTok (Anthropic pricing); models.dev has $0.10",
+    "set": {
+      "pricing": {"text_tokens": {"standard": {"cache_read_input_per_million": 0.2}}},
+      "metadata": {"cost": {"cache_read": 0.2}}
+    }
+  }
+}

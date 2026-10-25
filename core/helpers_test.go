@@ -137,3 +137,11 @@ func sse(body string) testserver.Reply {
 }
 
 func ptrEq[T comparable](p *T, v T) bool { return p != nil && *p == v }
+
+// ToTime reads models.json's "2006-01-02 15:04:05 UTC" (pyllym returns None).
+func TestToTimeRegistryFormat(t *testing.T) {
+	got := core.ToTime("2024-10-22 16:11:41 UTC")
+	if got == nil || !got.Equal(time.Date(2024, 10, 22, 16, 11, 41, 0, time.UTC)) {
+		t.Fatalf("got %v", got)
+	}
+}

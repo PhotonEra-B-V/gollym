@@ -23,6 +23,7 @@ gollym (see `go-shallowflaws/docs/ML_TO_GO_PLAN.md`).
 | Persistence | SQLAlchemy → a `database/sql`/pgx store with the same tables. |
 | Celery | → optional River workers (`riverjobs/`). |
 | bdd / tdg | Ported; they render Go tests instead of pytest. |
+| Registry refresh | **Diverges from pyllym.** `gollym models refresh` layers [models.dev](https://models.dev/api.json) over the provider listings (pyllym's refresh only lists providers, so its models.dev data was merged by hand). Entries from models.dev or a provider listing take models.dev's values (created_at kept, capabilities unioned, batch tiers and image pricing kept); entries with another `metadata.source` (`manual`, `known_models`, ...) are untouched; new models are added for the mapped providers; nothing is removed. Local corrections live in `registry/overrides.json`, each with a reason. `core.ToTime` reads `models.json`'s `... UTC` dates (pyllym drops them on save) and `registry.Marshal` writes them back in that form. A weekly scheduled run opens a PR with the refreshed `core/models.json`. |
 
 ## Phases
 

@@ -38,7 +38,7 @@ go get github.com/PhotonEra-B-V/gollym
 - **Decisions**: typed, calibrated answers from decision models (`gollym.Decide`)
 - **Embeddings**, **image** and **video** generation, **speech**, **transcription**, **moderation**, **layout parsing**
 - **Citations** normalised across providers
-- A bundled **model registry** (`models.json`) with pricing and capabilities, and **cost** per message and per chat
+- A bundled **model registry** (`models.json`) with pricing and capabilities, and **cost** per message and per chat. `gollym models refresh` updates it from the providers' model listings and [models.dev](https://models.dev); corrections go in `registry/overrides.json`
 - Retries with backoff that honour `Retry-After`; quota errors are never retried
 - Optional **persistence** of chats in PostgreSQL (`persistence`) and **River** background jobs (`riverjobs`)
 - **bdd** / **tdg**: TOML spec → test plan → rendered Go tests
